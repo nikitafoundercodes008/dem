@@ -1,0 +1,89 @@
+<%- include("../layout/header"); %>
+<%- include("../layout/sidebar"); %>
+
+<section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                
+            </div>
+            
+            <!-- Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><%= type %></h2>
+                            
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed table-hover dataTable js-exportable ">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>username</th>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <% if(types=='0'){ %>
+                                            <th>Action</th>
+                                            <% } %>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>username</th>
+                                            <th>Name</th>
+                                            <th>Mobile</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <% if(types=='0'){ %>
+                                            <th>Action</th>
+                                            <% } %>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <% var i=1;data.forEach(function(datas){ %>
+                                            <tr style="background-color:<%= datas.color %>;color:black">
+                                                <td style="width:100px"><%= i %></td>
+                                                <td style="width:100px"><%= datas.username %></td>
+                                                <td style="width:100px"><%= datas.name %></td>
+                                                <td style="width:100px"><%= datas.mobile %></td>
+                                                <td style="width:100px"><%= datas.amount %></td>
+                                                <% if(types=='0'){ %>
+                                                <td style="color:red">Pending</td>
+                                                <% } %>
+                                                <% if(types=='1'){ %>
+                                                <td style="color:green">Success</td>
+                                                <% } %>
+                                                <% if(types=='2'){ %>
+                                                <td style="color:red">Rejected</td>
+                                                <% } %>
+                                                <% if(types=='0'){ %>
+                                                <td style="width:100px">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="/prodsite/match-details/<%= datas.id %>/1">Pay</a></li>
+                                                            <li><a href="/prodsite/reject_withdrawal-request/<%= datas.userid %>/<%= datas.id %>"onclick="return confirm('Are You sure');">Reject</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                        <% i++;}); %>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Exportable Table -->
+        </div>
+    </section>
+<%- include("../layout/datatable"); %>

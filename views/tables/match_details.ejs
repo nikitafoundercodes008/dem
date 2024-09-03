@@ -1,0 +1,71 @@
+<%- include("../layout/header"); %>
+<%- include("../layout/sidebar"); %>
+
+<section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                
+            </div>
+            
+            <!-- Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><%= matchtype %></h2>
+                            
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed table-hover dataTable js-exportable ">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Name</th>
+                                            <th>Match Type</th>
+                                            <th>Home Team</th>
+                                            <th>Visitor Team</th>
+                                            <th>Start Date</th>
+                                            <th>Lineup Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Name</th>
+                                            <th>Match Type</th>
+                                            <th>Home Team</th>
+                                            <th>Visitor Team</th>
+                                            <th>Start Date</th>
+                                            <th>Lineup Status</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <% var i=1;data.forEach(function(datas){ %>
+                                            <tr>
+                                                <td><%= i %></td>
+                                                <td><%= datas.name %></td>
+                                                <td><%= datas.matchtype %></td>
+                                                <td><img src="<%= datas.hometeam_image %>" height="50px" width="50px">   <%= datas.hometeam_name %>( <%= datas.hometeam_short_name %> )</td>
+                                                <td><img src="<%= datas.visitorteam_image %>" height="50px" width="50px">   <%= datas.visitorteam_name %>( <%= datas.visitorteam_short_name %> )</td>
+                                                <td><%= datas.start_date %></td>
+                                                <% if(datas.is_lineup==0){ %>
+                                                    <td style="color:red">Lineup Not Out</td>
+                                                <% }else{ %>
+                                                    <td style="color:green">Lineup Out</td>
+                                                <% } %>
+                                                
+                                            </tr>
+                                        <% i++;}); %>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Exportable Table -->
+        </div>
+    </section>
+<%- include("../layout/datatable"); %>

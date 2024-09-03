@@ -1,0 +1,293 @@
+<%- include("../layout/header"); %>
+<%- include("../layout/sidebar"); %>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+<section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                
+            </div>
+            
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Business Settings</h2>
+                            
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>NAME</th>
+                                        <th>Value </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <% var i=1;data.forEach(function(datas){ if(datas.id!='5'){ %>
+                                    <tr>
+                                        <th scope="row"><%= i %></th>
+                                        <td style="width:200px"><%= datas.name %></td>
+                                        <% if(datas.name=='Logo' || datas.name=='Login Background'){ %>
+                                        <td style="width:500px"><img src="<%= datas.value %>" height="100px" width="100px"></td>
+                                        <% }else if(datas.name=='Bank Details'){ %>
+                                        <td style="width:500px">
+                                            <% value=JSON.parse(datas.value) %>
+                                            <b>Merchant Id  </b>:- <%= value.merchant_id %><br>
+                                            <b>Merchant Token  </b>:- <%= value.merchant_token %><br>
+                                            <b>Account Number  </b>:- <%= value.account_no %><br>
+                                            <b>IFSC Code  </b>:- <%= value.ifsccode %><br>
+                                            <b>Bank Name  </b>:- <%= value.bankname %><br>
+                                            <b>Account Holder Name </b>:- <%= value.account_holder_name %><br>
+                                            <b>Mobile No. </b>:- <%= value.contact %><br>
+                                        </td>
+                                        <% }else{ %>
+                                        <td style="width:500px"><%- datas.value %></td>
+                                        <% } %>
+                                        <td>
+                                            <div class="icon">
+                                                <i class="material-icons" style="font-size:32px;color:blue" data-toggle="modal" data-target="<%= datas.modal_type %>" data-id="<%= datas.id %>" data-values="<%= datas.value %>" data-name="<%= datas.name %>">list</i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% i++;}}); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+            <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                           
+                        </div>
+                        <form id="form_validation" action="/prodsite/update/business-setup" method="POST">
+                            <div class="modal-body">
+                                
+                                <div class="form-group form-float">
+                                <label id="name">Logo</label>
+                                    <div class="form-line">
+                                        <input type="hidden" class="form-control" name="id" id="id" required>
+                                        <input type="file" class="form-control" name="logo" id="value" required>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Large Size -->
+            <div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            
+                        </div>
+                        <div class="container-fluid">
+                        
+                            <!-- CKEditor -->
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h2 id="name">
+                                                
+                                            </h2>
+                                            
+                                        </div>
+                                        <form id="form_validation" action="/prodsite/update/business-setup" method="POST">
+                                            <div class="modal-body">
+                                                <div class="body">
+                                                    
+                                                    <input type="hidden" class="form-control" name="id" id="id" required>
+                                                    <textarea id="ckeditor" class="value" name="name"></textarea>
+                                                    
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- #END# CKEditor -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Small Size -->
+            <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        </div>
+                        <form id="form_validation" action="/prodsite/update/business-setup" method="POST">
+                            <div class="modal-body">
+                                
+                                <div class="form-group form-float">
+                                <label id="name"></label>
+                                    <div class="form-line">
+                                        <input type="hidden" class="form-control" name="id" id="id" required>
+                                        <input type="text" class="form-control" name="name" id="value" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="bankModel" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                           <h4>Update Bank Details</h4>
+                        </div>
+                        <form id="form_validation" action="/prodsite/update/business-setup" method="POST">
+                            <div class="modal-body">
+                                
+                                <div class="form-group form-float">
+                                    <label>Merchant Id</label>  
+                                    <div class="form-line">
+                                        <input type="hidden" class="form-control" name="id" id="id" required>
+                                        
+                                        <input type="text" class="form-control" name="merchant_id" id="merchant_id" required>
+                                        
+                                    </div>
+                                    <label>Merchant Token</label>  
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="merchant_token" id="merchant_token" required>
+                                    </div>
+                                    <label>Account Number</label>  
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="account_number" id="account_number" required>
+                                    </div>
+                                    <label>IFSC Code</label>  
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="ifsc_code" id="ifsccode" required>
+                                    </div>
+                                    <label>Bank Name</label>  
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="bank_name" id="bankname" required>
+                                    </div>
+                                    <label>Account Holder Name</label>  
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="acc_hplder_name" id="account_holder_name" required>
+                                    </div>
+                                    <label>Mobile Number</label>  
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="contact" id="contact" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                                <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    </section>
+    
+<script>
+   
+   $(document).ready(function(){
+       $('[data-toggle="modal"]').on('click', function () {
+           var id = $(this).data('id');
+            var value = $(this).data('values');
+            var name = $(this).data('name');
+           var modal = $('#smallModal');
+
+
+           modal.find('#id').val(id);
+           modal.find('#value').val(value);
+           modal.find('#name').text(name);
+       });
+   });
+   $(document).ready(function(){
+       $('[data-toggle="modal"]').on('click', function () {
+           var id = $(this).data('id');
+            var value = $(this).data('value');
+            var name = $(this).data('name');
+           var modal = $('#defaultModal');
+
+
+           modal.find('#id').val(id);
+           modal.find('#value').val(value);
+           modal.find('#name').text(name);
+       });
+   });
+   $(document).ready(function(){
+       $('[data-toggle="modal"]').on('click', function () {
+           var id = $(this).data('id');
+            var value = $(this).data('values');
+            var name = $(this).data('name');
+            console.log(value)
+           var modal = $('#largeModal');
+
+
+           modal.find('#id').val(id);
+           modal.find('#name').text(name);
+           
+           if (CKEDITOR.instances['ckeditor']) {
+                CKEDITOR.instances['ckeditor'].setData(value);  // Use CKEditor's setData method
+            }
+       });
+   });
+   
+   $(document).ready(function(){
+       $('[data-toggle="modal"]').on('click', function () {
+           var id = $(this).data('id');
+            var value = $(this).data('values');
+            var name = $(this).data('name');
+            
+            merchant_id=value.merchant_id;
+            merchant_token=value.merchant_token;
+            account_no=value.account_no;
+            ifsccode=value.ifsccode;
+            bankname=value.bankname;
+            account_holder_name=value.account_holder_name;
+            contact=value.contact;
+
+           var modal = $('#bankModel');
+
+
+           modal.find('#id').val(id);
+           modal.find('#value').val(value);
+           modal.find('#merchant_id').val(merchant_id);
+           modal.find('#merchant_token').val(merchant_token);
+           modal.find('#account_number').val(account_no);
+           modal.find('#ifsccode').val(ifsccode);
+           modal.find('#bankname').val(bankname);
+           modal.find('#account_holder_name').val(account_holder_name);
+           modal.find('#contact').val(contact);
+       });
+   });
+</script>
+    
+<%- include("../layout/editor"); %>

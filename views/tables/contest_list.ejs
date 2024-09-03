@@ -1,0 +1,73 @@
+<%- include("../layout/header"); %>
+<%- include("../layout/sidebar"); %>
+
+<section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                
+            </div>
+            
+            <!-- Exportable Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><%= type %></h2>
+                            
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed table-hover dataTable js-exportable ">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Name</th>
+                                            <th>Prize Pool</th>
+                                            <th>Entry Fee</th>
+                                            <th>Total Spot</th>
+                                            <th>Left Spot</th>
+                                            <th>Contest Winning Type</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Name</th>
+                                            <th>Prize Pool</th>
+                                            <th>Entry Fee</th>
+                                            <th>Total Spot</th>
+                                            <th>Left Spot</th>
+                                            <th>Contest Winning Type</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <% var i=1;data.forEach(function(datas){ %>
+                                            <tr>
+                                                <td><%= i %></td>
+                                                <td><%= datas.name %></td>
+                                                <td><%= datas.prize_pool %></td>
+                                                <td><%= datas.entry_fee %></td>
+                                                <td><%= datas.total_spot %></td>
+                                                <td><%= datas.start_date %></td>
+                                                <td><%= datas.contest_success_type %></td>
+                                                <% if(datas.status==0){ %>
+                                                    <td style="color:red">Inactive</td>
+                                                <% }else{ %>
+                                                    <td style="color:green">Active</td>
+                                                <% } %>
+                                            </tr>
+                                        <% i++;}); %>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Exportable Table -->
+        </div>
+    </section>
+<%- include("../layout/datatable"); %>

@@ -1,0 +1,40 @@
+<%- include("layout/header"); %>
+<%- include("layout/sidebar"); %>
+
+<section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>DASHBOARD</h2>
+            </div>
+
+            <!-- Widgets -->
+            <div class="row clearfix">
+                <% dashboarddata.forEach(function(datas){ %>
+         
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-<%= datas.colorname %> hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons"><%= datas.icon %></i>
+                            </div>
+                            <div class="content">
+                                <div class="text"><%= datas.name %></div>
+                                <button class="fetchData" data-dynamic="<%= datas.counts %>" data-type="<%= datas.type %>" style="display:none;">Fetch Data</button>
+                                <div class="number count-to" data-from="0" data-to="126" data-speed="15" data-fresh-interval="20"></div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                <% }) %>
+                
+                
+            </div>
+            <!-- #END# Widgets -->
+            <!-- CPU Usage -->
+            
+            <!-- #END# CPU Usage -->
+            
+
+            
+        </div>
+    </section>
+<%- include("layout/footer"); %>
